@@ -1,0 +1,9 @@
+venv
+db.sqlite3
+__pycache__
+*.swp
+project/media/*
+!project/media/.gitkeep
+.env
+env.sh
+static/

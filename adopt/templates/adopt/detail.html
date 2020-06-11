@@ -1,0 +1,16 @@
+{% extends 'adopt/base.html' %}
+
+{% block main %}
+  <div>
+    <div>
+      Hi! My name is {{ pet.name }}!
+    </div>
+
+    <div>
+      <strong>Breed</strong>: {{ pet.breed }}
+    </div>
+
+    <img width=300 src="/media/{{ pet.profile_image }}"></img>
+
+  </div>
+{% endblock %}

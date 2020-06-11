@@ -1,0 +1,16 @@
+runtime: python37
+
+handlers:
+    # This configures Google App Engine to serve the files in the app's
+    # static directory.
+     - url: /static
+       static_dir: static
+
+     - url: /.*
+       script: auto
+
+env_variables:
+    PGDATABASE: 'adopt'
+    PGUSER: 'postgres'
+    PGHOST: /cloudsql/ieor-tools-for-analytics:us-east4:adopt
+
