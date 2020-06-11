@@ -1,16 +1,81 @@
 {% extends 'adopt/base.html' %}
 
+{% load static %}
+
+{% block title %} - {{ pet.name }}{% endblock %}
+
 {% block main %}
-  <div>
-    <div>
-      Hi! My name is {{ pet.name }}!
+  <div class="album py-5 bg-light">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <img class="bd-placeholder-img card-img-top"
+                 width="225" height="225" preserveAspectRatio="xMidYMid slice"
+                 focusable="false" role="img" aria-label="{{ pet.name }}"
+                 src="{% get_media_prefix %}{{ pet.profile_image }}"></img>
+          </div>
+        </div>
+        <div class="col-md-8">
+          <div class="card mb-8 shadow-sm">
+            <div class="card-body">
+              <p class="card-text">
+                <div class="pet-name">
+                  <strong>{{ pet.name }}</strong>
+                </div>
+                <div>
+                  <span class="text-muted font-italic">Breed:</span>
+                  <span>
+                    {{ pet.breed }}
+                  </span>
+                </div>
+                <div>
+                  <span class="text-muted font-italic">Sex:</span>
+                  <span>
+                    {{ pet.sex }}
+                  </span>
+                </div>
+                <div>
+                  <span class="text-muted font-italic">Birthday:</span>
+                  <span>
+                    {{ pet.birth_date }}
+                  </span>
+                </div>
+                <div>
+                  <span class="text-muted font-italic">Vaccinated:</span>
+                  <span>
+                    {% if pet.vaccinated %}Yep!{% else %}Not yet.{% endif %}
+                  </span>
+                </div>
+                <div>
+                  <span class="text-muted font-italic">Bio...</span>
+                  <span>
+                    {{ pet.bio }}
+                  </span>
+                </div>
+                <div>
+                  <span class="text-muted font-italic">Adopt me if...</span>
+                  <span>
+                    {{ pet.adopt_me_if }}
+                  </span>
+                </div>
+                <div>
+                  <span class="text-muted font-italic">First thing people notice about me is...</span>
+                  <span>
+                    {{ pet.first_thing_people_notice_about_me }}
+                  </span>
+                </div>
+                <div>
+                  <span class="text-muted font-italic">On a typical Friday night I am...</span>
+                  <span>
+                    {{ pet.firday_night }}
+                  </span>
+                </div>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-
-    <div>
-      <strong>Breed</strong>: {{ pet.breed }}
-    </div>
-
-    <img width=300 src="/media/{{ pet.profile_image }}"></img>
-
   </div>
 {% endblock %}

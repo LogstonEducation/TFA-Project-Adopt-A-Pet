@@ -72,19 +72,6 @@ if os.getenv('GAE_APPLICATION', None):
         }
     }
 
-elif os.getenv('GAE_LOCAL_APPLICATION', None):
-    # Run against GAE DB but run application locally
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': os.environ.get('PGDATABASE'),
-            'USER': os.environ.get('PGUSER'),
-            'PASSWORD': os.environ.get('PGPASSWORD'),
-            'HOST': os.environ.get('PGHOST'),
-            'PORT': os.environ.get('PGPORT'),
-        }
-    }
-
 else:
     # Fall back to sqlite
     DATABASES = {
