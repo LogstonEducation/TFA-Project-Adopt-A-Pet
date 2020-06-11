@@ -1,6 +1,6 @@
 from django.forms import ModelForm
 
-from .models import AdoptRequest, Pet
+from .models import AdoptRequest
 
 
 class AdoptRequestForm(ModelForm):
@@ -11,10 +11,3 @@ class AdoptRequestForm(ModelForm):
             'pet',
             'adopter',
         ]
-
-
-class PetForm(ModelForm):
-    class Meta:
-        model = Pet
-        fields = '__all__'
-

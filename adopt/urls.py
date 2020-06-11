@@ -8,7 +8,6 @@ app_name = 'adopt'
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('add', views.add_a_pet, name='add'),
     path('<int:pet_id>/', views.pet_details, name='details'),
     path('<int:pet_id>/request', views.request_a_pet, name='request'),
 ]

@@ -74,9 +74,8 @@ class AdoptRequest(models.Model):
         auto_now_add=True,
     )
 
-    adopter = models.CharField(
-        max_length=100,
-        help_text=_('Name of adopter'),
+    adopter = models.EmailField(
+        help_text=_('Email of adopter'),
     )
 
     def __str__(self):
