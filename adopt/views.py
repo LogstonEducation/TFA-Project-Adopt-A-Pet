@@ -1,3 +1,4 @@
+from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render
 
@@ -22,16 +23,13 @@ def pet_details(request, pet_id):
     return render(request, 'adopt/detail.html', context)
 
 
-def request_a_pet(request, pet_id):
-    initial = {
-        'pet': pet_id,
-    }
+def request_a_pet(request):
     if request.method == 'POST':
-        form = AdoptRequestForm(request.POST, initial=initial)
+        form = AdoptRequestForm(request.POST)
         if form.is_valid():
             form.save()
-            return JSONResponse()
+            return JsonResponse({})
+        else:
+            return JsonResponse({'errors': form.errors}, status=400)
 
-    # add ajax request to this site
-
-    return JSONResponse
+    return JsonResponse({})

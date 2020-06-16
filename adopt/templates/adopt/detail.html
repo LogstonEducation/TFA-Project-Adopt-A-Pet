@@ -9,12 +9,27 @@
     <div class="container">
       <div class="row">
         <div class="col-md-4">
-          <div class="card mb-4 shadow-sm">
-            <img class="bd-placeholder-img card-img-top"
-                 width="225" height="225" preserveAspectRatio="xMidYMid slice"
-                 focusable="false" role="img" aria-label="{{ pet.name }}"
-                 src="{% get_media_prefix %}{{ pet.profile_image }}"></img>
+          <div>
+            <div class="card mb-3 shadow-sm">
+              <img class="bd-placeholder-img card-img-top"
+                   width="225" height="225" preserveAspectRatio="xMidYMid slice"
+                   focusable="false" role="img" aria-label="{{ pet.name }}"
+                   src="{% get_media_prefix %}{{ pet.profile_image }}"></img>
+            </div>
           </div>
+          <form id="submit" method="post" action="{% url 'adopt:request' %}" class="input-group mb-3">
+            {% csrf_token %}
+            <input type="text"
+                   name="adopter"
+                   class="form-control"
+                   placeholder="Email Address"
+                   aria-label="Email Address"/>
+            <input type="hidden" name="pet_id" value="{{ pet.id }}">
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary" type="submit">Request</button>
+            </div>
+            <div id="errors" class="mb-3"></div>
+          </form>
         </div>
         <div class="col-md-8">
           <div class="card mb-8 shadow-sm">
@@ -78,4 +93,41 @@
       </div>
     </div>
   </div>
+{% endblock %}
+{% block extra_footer %}
+  <script>
+    function csrfSafeMethod(method) {
+      // these HTTP methods do not require CSRF protection
+      return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+    }
+
+    var csrftoken = $("[name=csrfmiddlewaretoken]").val();
+    $.ajaxSetup({
+      beforeSend: function(xhr, settings) {
+        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+          xhr.setRequestHeader("X-CSRFToken", csrftoken);
+        }
+      }
+    });
+
+    $("#submit").submit(function(event) {
+      event.preventDefault();
+
+      var email = $('input[name=adopter]').val();
+
+      $.post({
+        url: "{% url 'adopt:request' %}",
+        data: {
+          pet: "{{ pet.id }}",
+          adopter: email,
+        },
+        dataType: "json",
+      }).done(function(response) {
+        $("#submit").html('Your request has been received!');
+      }).fail(function(response) {
+        var errors = response.responseJSON.errors.adopter;
+        $("#submit").html(errors);
+      });
+    });
+  </script>
 {% endblock %}

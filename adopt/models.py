@@ -66,7 +66,7 @@ class Pet(models.Model):
 class AdoptRequest(models.Model):
     pet = models.ForeignKey(
         'adopt.Pet',
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
     )
 
     create_ts = models.DateTimeField(
@@ -79,4 +79,4 @@ class AdoptRequest(models.Model):
     )
 
     def __str__(self):
-        return f'{self.adopter} at {self.create_ts.date()}'
+        return f'{self.adopter} at {self.create_ts}'
