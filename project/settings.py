@@ -8,10 +8,10 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'mu#+d@_rty$=u_!qezyc^b1o6p5%203!wr7)9yvc(+6if6kazh'
+SECRET_KEY = os.environ.get('SECRET_KEY') or 'abcef12345'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = (os.environ.get('DEBUG') or '') == 'true'
 
 ALLOWED_HOSTS = ['*']
 
@@ -59,16 +59,31 @@ TEMPLATES = [
 WSGI_APPLICATION = 'project.wsgi.application'
 
 # Database
-if os.getenv('GAE_APPLICATION', None):
-    # Only for GAE
-    import gae_env
+if os.environ.get('GAE_APPLICATION'):
+    # If the host is not 127.0.0.1, assume we are running in GAE.
+    host = os.environ.get('PGHOST')
+    if host == '127.0.0.1':
+        host = os.environ.get('PGHOST')
+        port = os.environ.get('PGPORT')
+        database = os.environ.get('PGDATABASE')
+        username = os.environ.get('PGUSERNAME')
+        password = os.environ.get('PGPASSWORD')
+    else:
+        host = '/cloudsql/' + os.environ.get('INSTANCE_CONNECTION_NAME')
+        port = None
+        database = os.environ.get('PGDATABASE')
+        username = os.environ.get('PGUSERNAME')
+        password = os.environ.get('PGPASSWORD')
+
+    # Connect to GCP CloudSQL
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': os.environ.get('PGDATABASE'),
-            'USER': os.environ.get('PGUSER'),
-            'PASSWORD': gae_env.get('ADOPT_DB_PASSWORD'),
-            'HOST': os.environ.get('PGHOST'),
+            'NAME': database,
+            'USER': username,
+            'PASSWORD': password,
+            'HOST': host,
+            'PORT': port,
         }
     }
 

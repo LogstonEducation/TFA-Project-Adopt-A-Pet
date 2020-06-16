@@ -4,6 +4,7 @@ __pycache__
 *.swp
 media/*
 !media/.gitkeep
-.env
+app.yaml
+.env*
 env.sh
 static/

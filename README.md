@@ -30,4 +30,12 @@ This project will follow much of the same outline of the official Django tutoria
     source env.sh
     python manage.py migrate
 
+    gcloud init
+    gcloud app deploy
+
+sing the Google Cloud SQL
+- https://cloud.google.com/sql/docs/postgres/connect-app-engine-standard
+- Enable API
+- Create CloudSQL instance
+- 
 

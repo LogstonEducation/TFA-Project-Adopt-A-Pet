@@ -125,7 +125,11 @@
       }).done(function(response) {
         $("#submit").html('Your request has been received!');
       }).fail(function(response) {
-        var errors = response.responseJSON.errors.adopter;
+        if (response.statusText === "error") {
+          var errors = "Oops, looks like an error on our side. Please try again later.";
+        } else {
+          var errors = response.responseJSON.errors.adopter;
+        }
         $("#submit").html(errors);
       });
     });

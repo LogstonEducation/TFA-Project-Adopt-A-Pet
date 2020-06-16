@@ -10,7 +10,8 @@ handlers:
        script: auto
 
 env_variables:
-    PGDATABASE: 'adopt'
+    INSTANCE_CONNECTION_NAME: '< your connection name >'  # eg. 'ieor-tools-for-analytics:asia-east1:adopt'
+    PGDATABASE: 'postgres'
     PGUSER: 'postgres'
-    PGHOST: /cloudsql/ieor-tools-for-analytics:us-east4:adopt
-
+    PGPASSWORD: '<your db password>'
+    SECRET_KEY: '<your secret key!>'
