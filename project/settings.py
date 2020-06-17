@@ -136,6 +136,9 @@ MEDIA_ROOT = 'media'
 MEDIA_URL = '/media/'
 
 if os.environ.get('GAE_APPLICATION'):
+    GS_DEFAULT_ACL = 'publicRead'
     DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
     STATICFILES_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
     GS_BUCKET_NAME = os.environ.get('GS_BUCKET_NAME')
+    MEDIA_URL = f'https://storage.cloud.google.com/{GS_BUCKET_NAME}/'
+    STATIC_URL = f'https://storage.cloud.google.com/{GS_BUCKET_NAME}/'
