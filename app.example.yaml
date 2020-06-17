@@ -15,3 +15,5 @@ env_variables:
     PGUSER: 'postgres'
     PGPASSWORD: '<your db password>'
     SECRET_KEY: '<your secret key!>'
+    GS_BUCKET_NAME: '<your GAE GS bucket name>'  # eg. 'ieor-tools-for-analytics.appspot.com'
+    GOOGLE_APPLICATION_CREDENTIALS: '<your key name>'  # eg. 'service-account-key.json'

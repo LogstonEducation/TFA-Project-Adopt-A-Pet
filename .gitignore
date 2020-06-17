@@ -1,12 +1,22 @@
+# Python Specifics
 venv
-db.sqlite3
-.DS_Store
 __pycache__
+
+# Editor & OS
+.DS_Store
 *.swp
+
+# Media & Static
 media/*
 !media/.gitkeep
-app.yaml
-.env*
-env.sh
-static/
+static/*
+!static/.gitkeep
+
+# Data
+db.sqlite3
+
+# Secrets
 service-account-key.json
+app.yaml
+.env
+.env-common
