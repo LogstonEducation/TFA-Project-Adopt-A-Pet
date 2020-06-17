@@ -1,5 +1,6 @@
 venv
 db.sqlite3
+.DS_Store
 __pycache__
 *.swp
 media/*
@@ -8,3 +9,4 @@ app.yaml
 .env*
 env.sh
 static/
+service-account-key.json

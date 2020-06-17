@@ -11,7 +11,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.environ.get('SECRET_KEY') or 'abcef12345'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = (os.environ.get('DEBUG') or '') == 'true'
+DEBUG = (os.environ.get('DEBUG') or '').strip().lower() in ('1', 'true')
 
 ALLOWED_HOSTS = ['*']
 
@@ -134,3 +134,8 @@ STATIC_URL = '/static/'
 
 MEDIA_ROOT = 'media'
 MEDIA_URL = '/media/'
+
+if os.environ.get('GAE_APPLICATION'):
+    DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
+    STATICFILES_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
+    GS_BUCKET_NAME = os.environ.get('GS_BUCKET_NAME')

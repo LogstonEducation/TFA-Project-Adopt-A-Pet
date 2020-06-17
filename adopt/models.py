@@ -41,6 +41,7 @@ class Pet(models.Model):
     profile_image = models.ImageField(
         help_text=_('Profile picture of pet'),
         blank=True,
+        upload_to='profile_images',
     )
 
     bio = models.TextField(
