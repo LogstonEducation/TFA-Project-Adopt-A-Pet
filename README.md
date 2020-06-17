@@ -37,5 +37,8 @@ sing the Google Cloud SQL
 - https://cloud.google.com/sql/docs/postgres/connect-app-engine-standard
 - Enable API
 - Create CloudSQL instance
-- 
+- Set permissions on app role
+- Download service account key
+- collectstatic on local machine
+- explain start-env.sh
 
