@@ -1,5 +1,12 @@
 # Learning Django
 
+
+Steps
+
+- Create virtual environment with requirements.txt file
+
+
+
 This project will follow much of the same outline of the official Django tutorial.
 
 - Starting a project
